@@ -1,1 +1,2 @@
-Here all algorithms for strategiy testing are stored... like high_short for example
+# Strategies
+In this folder all coded strategies are collected. At the moment only "high-short".
