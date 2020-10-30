@@ -2,9 +2,9 @@ import hs_basic as hs
 import pickle
 from datetime import datetime
 
-newHighMarge = [x/1000 for x in range(0, 100, 2)]
-gainRealizationAt = [x/1000 for x in range(2, 302, 2)]
-knockOut = [x/1000 for x in range(2, 302, 2)]
+newHighMarge = [x/1000 for x in range(0, 102, 2)]
+gainRealizationAt = [x/1000 for x in range(2, 202, 2)]
+knockOut = [x/1000 for x in range(2, 202, 2)]
 
 values, val1, val2 = [], [], []
 today = datetime.now()
