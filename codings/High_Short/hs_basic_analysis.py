@@ -1,5 +1,4 @@
 import hs_basic as hs
-from sys import argv
 
 newHighMarge = [x/1000 for x in range(0, 100, 2)]
 gainRealizationAt = [x/1000 for x in range(2, 302, 2)]
