@@ -30,7 +30,7 @@ def valuate(self, searchkey='totalGain'):
     return (max, nhmVal, gainVal, knockVal)
 
 for nhM in range(0, len(newHighMarge)):
-    print(nhM, len(newHighMarge))
+    print("\t\t", nhM, len(newHighMarge))
     for gain in range(0, len(gainRealizationAt)):
         print(gain, len(gainRealizationAt))
         for knock in range(0, len(knockOut)):

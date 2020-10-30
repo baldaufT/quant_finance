@@ -23,7 +23,7 @@ class Position:
             self.gain = self.result - self.cost
 
 class Instance:
-    def __init__(self, csv_file="../../data/DAX_DATA/Price_History_daily_50y.csv", newHighMarge = 0.005, gainRealizationAt = 0.06, knockOut = 0.01):
+    def __init__(self, csv_file = "../../data/DAX_DATA/Price_History_daily_50y.csv", newHighMarge = 0.005, gainRealizationAt = 0.06, knockOut = 0.01):
         self.data = pd.read_csv(csv_file) # path to file
         self.newHighMarge = newHighMarge # in percent
         self.gainRealizationAt = gainRealizationAt # in percent
