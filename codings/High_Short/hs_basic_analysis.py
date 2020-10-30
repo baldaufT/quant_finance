@@ -1,50 +1,64 @@
 import hs_basic as hs
+import pickle
+from datetime import datetime
 
 newHighMarge = [x/1000 for x in range(0, 100, 2)]
 gainRealizationAt = [x/1000 for x in range(2, 302, 2)]
 knockOut = [x/1000 for x in range(2, 302, 2)]
 
-values = []
+values, val1, val2 = [], [], []
+today = datetime.now()
+uniqueResults = True # if True, output will be unique, False: Output will show combinations
 
-def valuate(self, str='totalGain'):
-    index = 2
-    if str == 'totalPositions':
-        index = 0
-    elif str == 'totalCost':
-        index = 1
-    elif str == 'totalResult':
-        index = 3
-    elif str == 'totalKnockOuts':
-        index = 4
-    elif str == 'ret':
-        index = 5
-    elif str == 'yoyret':
-        index = 6
+def valuate(self, searchkey='totalGain'):
     
     max, nhmVal, gainVal, knockVal = 0, [], [], []
 
-    for val1 in range(0, len(values)):
-        for val2 in range(0, len(val1)):
-            for val3 in range(0, len(val2)):
-                if values[val1, val2, val3, index] == max:
-                    nhmVal.add(val1)
-                    gainVal.add(val2)
-                    knockVal.add(val3)
-                elif values[val1, val2, val3, index] > max:
-                    max = values[val1, val2, val3, 0]
+    for val1 in range(0, len(newHighMarge)):
+        for val2 in range(0, len(gainRealizationAt)):
+            for val3 in range(0, len(knockOut)):
+                if values[val1][val2][val3][searchkey] == max:
+                    nhmVal.append(val1)
+                    gainVal.append(val2)
+                    knockVal.append(val3)
+                if values[val1][val2][val3][searchkey] > max:
+                    max = values[val1][val2][val3][searchkey]
                     nhmVal = [val1]
                     gainVal = [val2]
                     knockVal = [val3]
-    
+
     return (max, nhmVal, gainVal, knockVal)
 
-for nhM in newHighMarge:
-    for gain in gainRealizationAt:
-        for knock in knockOut:
-            Inst = hs.Instance(newHighMarge = nhM, gainRealizationAt = gain, knockOut = knock)
-            buff = Inst.valuate()
-            values[nhM, gain, knock] = (buff['totalPositions'], buff['totalCost'], buff['totalGain'], buff['totalResult'], buff['totalKnockOuts'], buff['ret'], buff['yoyret'])
+for nhM in range(0, len(newHighMarge)):
+    for gain in range(0, len(gainRealizationAt)):
+        for knock in range(0, len(knockOut)):
+            Inst = hs.Instance(newHighMarge = newHighMarge[nhM], gainRealizationAt = gainRealizationAt[gain], knockOut = knockOut[knock])
+            val2.append(Inst.valuate())
+        val1.append(val2)
+    values.append(val1)
+
+with open("value_data/values_" + str(today.year) + "-" + str(today.month) + "-" + str(today.day) + "_" + str(today.hour) +\
+    "h" + str(today.minute) +"min" + str(today.second) + "sec.pickle", "wb") as file:
+    pickle.dump(values, file)
 
 resultValues = valuate('totalGain')
+nhmVal = [newHighMarge[n] for n in resultValues[1]]
+gainVal = [gainRealizationAt[n] for n in resultValues[2]]
+knockVal = [knockOut[n] for n in resultValues[3]]
+ret = [round(values[resultValues[1][index]][resultValues[2][index]][resultValues[3][index]]['ret'], 2) for index in range(0, len(nhmVal))]
+totalCost = [round(values[resultValues[1][index]][resultValues[2][index]][resultValues[3][index]]['totalCost'], 2) for index in range(0, len(nhmVal))]
 
-print('Your Search: \n\t- Max_Value: ', resultValues[0], '\n\t- newHighMarge: ', resultValues[1], '\n\t- gainRealizationAt: ', resultValues[2], '\n\t- knockOut: ', resultValues[3])
+if uniqueResults:
+    nhmVal = set(nhmVal)
+    gainVal = set(gainVal)
+    knockVal = set(knockVal)
+    ret = set(ret)
+    totalCost = set(totalCost)
+
+
+print('Your Search: \n\t- Max_Value: ' + str(resultValues[0]) +\
+    '\n\t- newHighMarge: ' + str(nhmVal) +\
+    '\n\t- gainRealizationAt: ' + str(gainVal) + \
+    '\n\t- knockOut: ' + str(knockVal) +\
+    '\n\t- return: ' + str(ret) + "%" +\
+    '\n\t- totalCost: ' + str(totalCost))
