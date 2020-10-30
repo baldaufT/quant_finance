@@ -13,7 +13,7 @@ uniqueResults = True # if True, output will be unique, False: Output will show c
 def valuate(self, searchkey='totalGain'):
     
     max, nhmVal, gainVal, knockVal = 0, [], [], []
-
+    print("Started with Analysis")
     for val1 in range(0, len(newHighMarge)):
         for val2 in range(0, len(gainRealizationAt)):
             for val3 in range(0, len(knockOut)):
@@ -26,10 +26,11 @@ def valuate(self, searchkey='totalGain'):
                     nhmVal = [val1]
                     gainVal = [val2]
                     knockVal = [val3]
-
+    print("Finished with Analysis, return [VALUES]")
     return (max, nhmVal, gainVal, knockVal)
 
 for nhM in range(0, len(newHighMarge)):
+    print(nhM, len(newHighMarge))
     for gain in range(0, len(gainRealizationAt)):
         for knock in range(0, len(knockOut)):
             Inst = hs.Instance(newHighMarge = newHighMarge[nhM], gainRealizationAt = gainRealizationAt[gain], knockOut = knockOut[knock])

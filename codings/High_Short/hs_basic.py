@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 
 class Position:
@@ -24,7 +23,6 @@ class Position:
             self.gain = self.result - self.cost
 
 class Instance:
-
     def __init__(self, csv_file="../../data/DAX_DATA/Price_History_daily_50y.csv", newHighMarge = 0.005, gainRealizationAt = 0.06, knockOut = 0.01):
         self.data = pd.read_csv(csv_file) # path to file
         self.newHighMarge = newHighMarge # in percent
@@ -75,7 +73,6 @@ class Instance:
 
         return {'totalPositions': totalPositions, 'totalCost': totalCost ,'totalGain': totalGain, 
         'totalResult': totalResult, 'totalKnockOuts': totalKnockOuts ,'ret': ret, 'yoyret': yoyret}
-
 
 if __name__ == '__main__':
     I1 = Instance()
