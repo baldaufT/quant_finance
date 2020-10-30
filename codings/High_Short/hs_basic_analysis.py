@@ -1,13 +1,14 @@
 import hs_basic as hs
 import pickle
-from datetime import datetime
+from datetime import datetime as dt
+import matplotlib.pyplot as plt
 
 newHighMarge = [x/1000 for x in range(0, 102, 2)]
 gainRealizationAt = [x/1000 for x in range(2, 202, 2)]
 knockOut = [x/1000 for x in range(2, 202, 2)]
 
-values, val1, val2 = [], [], []
-today = datetime.now()
+values, val1, val2, time = [], [], [], []
+today = dt.now()
 uniqueResults = True # if True, output will be unique, False: Output will show combinations
 
 def valuate(self, searchkey='totalGain'):
@@ -34,8 +35,10 @@ for nhM in range(0, len(newHighMarge)):
     for gain in range(0, len(gainRealizationAt)):
         print(gain, len(gainRealizationAt))
         for knock in range(0, len(knockOut)):
+            time1 = dt.now()
             Inst = hs.Instance(newHighMarge = newHighMarge[nhM], gainRealizationAt = gainRealizationAt[gain], knockOut = knockOut[knock])
             val2.append(Inst.valuate())
+            time.append((dt.now()-time1).total_seconds())
         val1.append(val2)
     values.append(val1)
 
@@ -57,6 +60,11 @@ if uniqueResults:
     ret = set(ret)
     totalCost = set(totalCost)
 
+time = time / len(knockOut)
+plt.plot(time)
+plt.ylabel('Seconds per 100 Instances')
+plt.xlabel('Batches - Progress')
+plt.show()
 
 print('Your Search: \n\t- Max_Value: ' + str(resultValues[0]) +\
     '\n\t- newHighMarge: ' + str(nhmVal) +\
