@@ -32,6 +32,7 @@ def valuate(self, searchkey='totalGain'):
 for nhM in range(0, len(newHighMarge)):
     print(nhM, len(newHighMarge))
     for gain in range(0, len(gainRealizationAt)):
+        print(gain, len(gainRealizationAt))
         for knock in range(0, len(knockOut)):
             Inst = hs.Instance(newHighMarge = newHighMarge[nhM], gainRealizationAt = gainRealizationAt[gain], knockOut = knockOut[knock])
             val2.append(Inst.valuate())
