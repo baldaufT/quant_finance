@@ -42,7 +42,7 @@ for nhM in range(0, len(newHighMarge)):
         val1.append(val2)
     values.append(val1)
 
-with open("value_data/values_" + str(today.year) + "-" + str(today.month) + "-" + str(today.day) + "_" + str(today.hour) +\
+with open("result_data/values_" + str(today.year) + "-" + str(today.month) + "-" + str(today.day) + "_" + str(today.hour) +\
     "h" + str(today.minute) +"min" + str(today.second) + "sec.pickle", "wb") as file:
     pickle.dump(values, file)
 
@@ -61,6 +61,10 @@ if uniqueResults:
     totalCost = set(totalCost)
 
 time = time / len(knockOut)
+with open("result_data/time_" + str(today.year) + "-" + str(today.month) + "-" + str(today.day) + "_" + str(today.hour) +\
+    "h" + str(today.minute) +"min" + str(today.second) + "sec.pickle", "wb") as file2:
+    pickle.dump(values, file2)
+
 plt.plot(time)
 plt.ylabel('Seconds per 100 Instances')
 plt.xlabel('Batches - Progress')
