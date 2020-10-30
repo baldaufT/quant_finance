@@ -3,7 +3,7 @@ import pickle
 from datetime import datetime as dt
 import matplotlib.pyplot as plt
 
-newHighMarge = [x/1000 for x in range(0, 102, 2)]
+newHighMarge = [x/1000 for x in range(0, 51)]
 gainRealizationAt = [x/1000 for x in range(2, 202, 2)]
 knockOut = [x/1000 for x in range(2, 202, 2)]
 
