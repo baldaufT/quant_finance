@@ -3,9 +3,9 @@ import pickle
 from datetime import datetime as dt
 import matplotlib.pyplot as plt
 
-newHighMarge = [x/1000 for x in range(0, 51)] + [x/1000 for x in range(52, 102, 2)] # in current values missing are [x/1000 for x in range(1, 51, 2)]
-gainRealizationAt = [x/1000 for x in range(2, 202, 2)]
-knockOut = [x/1000 for x in range(2, 202, 2)]
+newHighMarge = [0.005] #[x/1000 for x in range(0, 51)] + [x/1000 for x in range(52, 102, 2)]
+gainRealizationAt = [0.01, 0.02, 0.04, 0.06]#[x/1000 for x in range(2, 202, 2)]
+knockOut = [0.01, 0.05, 0.07]#[x/1000 for x in range(2, 202, 2)]
 
 values, val1, val2, time = [], [], [], []
 today = dt.now()
@@ -31,9 +31,8 @@ def valuate(self, searchkey='totalGain'):
     return (max, nhmVal, gainVal, knockVal)
 
 for nhM in range(0, len(newHighMarge)):
-    print("\t\t", nhM, len(newHighMarge))
-    for gain in range(0, len(gainRealizationAt)):
-        print(gain, len(gainRealizationAt), nhM)
+    for gain in range(0,len(gainRealizationAt)):
+        print(gain, ' of ', len(gainRealizationAt), ' - ', nhM, ' of ', len(newHighMarge))
         for knock in range(0, len(knockOut)):
             time1 = dt.now()
             Inst = hs.Instance(newHighMarge = newHighMarge[nhM], gainRealizationAt = gainRealizationAt[gain], knockOut = knockOut[knock])
@@ -60,10 +59,10 @@ if uniqueResults:
     ret = set(ret)
     totalCost = set(totalCost)
 
-time = time / len(knockOut)
+time = [t / len(knockOut) for t in time]
 with open("result_data/time_" + str(today.year) + "-" + str(today.month) + "-" + str(today.day) + "_" + str(today.hour) +\
     "h" + str(today.minute) +"min" + str(today.second) + "sec.pickle", "wb") as file2:
-    pickle.dump(values, file2)
+    pickle.dump(time, file2)
 
 plt.plot(time)
 plt.ylabel('Seconds per 100 Instances')
