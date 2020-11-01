@@ -3,7 +3,7 @@ import pickle
 from datetime import datetime as dt
 import matplotlib.pyplot as plt
 
-newHighMarge = [x/1000 for x in range(0, 51)] + [x/1000 for x in range(52, 102, 2)] # in current values missing are x/1000 for x in range(1, 51, 2)]
+newHighMarge = [x/1000 for x in range(1, 51, 2)] #[x/1000 for x in range(0, 51)] + [x/1000 for x in range(52, 102, 2)] # in current values missing are [x/1000 for x in range(1, 51, 2)]
 gainRealizationAt = [x/1000 for x in range(2, 202, 2)]
 knockOut = [x/1000 for x in range(2, 202, 2)]
 
@@ -33,7 +33,7 @@ def valuate(self, searchkey='totalGain'):
 for nhM in range(0, len(newHighMarge)):
     print("\t\t", nhM, len(newHighMarge))
     for gain in range(0, len(gainRealizationAt)):
-        print(gain, len(gainRealizationAt))
+        print(gain, len(gainRealizationAt), nhM)
         for knock in range(0, len(knockOut)):
             time1 = dt.now()
             Inst = hs.Instance(newHighMarge = newHighMarge[nhM], gainRealizationAt = gainRealizationAt[gain], knockOut = knockOut[knock])
