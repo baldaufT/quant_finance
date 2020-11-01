@@ -3,9 +3,9 @@ import pickle
 from datetime import datetime as dt
 import matplotlib.pyplot as plt
 
-newHighMarge = [0.005, 0.01] #[x/1000 for x in range(0, 51)] + [x/1000 for x in range(52, 102, 2)]
-gainRealizationAt = [0.01, 0.02, 0.04, 0.06]#[x/1000 for x in range(2, 202, 2)]
-knockOut = [0.01, 0.05, 0.07]#[x/1000 for x in range(2, 202, 2)]
+newHighMarge = [x/1000 for x in range(0, 51)] + [x/1000 for x in range(52, 102, 2)]
+gainRealizationAt = [x/1000 for x in range(2, 202, 2)]
+knockOut = [x/1000 for x in range(2, 202, 2)]
 
 values, val1, val2, time = [], [], [], []
 today = dt.now()
@@ -70,8 +70,6 @@ print('Your Search: \n\t- Max_Value: ' + str(resultValues[0]) +\
     '\n\t- knockOut: ' + str(knockVal) +\
     '\n\t- return: ' + str(ret) + "%" +\
     '\n\t- totalCost: ' + str(totalCost))
-
-print(resultValues)
 
 plt.plot(time)
 plt.ylabel('Seconds per 100 Instances')
